@@ -24,7 +24,7 @@ if 'DATABASES' not in locals():
     DATABASES['default'] = dj_database_url.config(default='postgres://(username):(password)@localhost:5432/db_name')
 
 if POSTGRES_URL in os.environ:
-    DATABASES = {}
+    DATABASES = {'default':dj_database_url.config()}
     DATABASES['default'] = dj_database_url.config(default=os.environ[POSTGRES_URL])
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
