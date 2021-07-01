@@ -1,0 +1,20 @@
+{%extends 'all_news/base.html'%}
+
+{%block content%}
+{%if searched_articles%}
+<div class="row">
+  {%for article in searched_articles%}
+  <div class="card bg-info col-md-5" style="width: 18rem;">
+    <img class="card-img-top" src="{{article.article_image.url}}" alt="Card image cap">
+    <div class="card-body bg-info">
+      <h5 class="card-title">{{article.title}}</h5>
+      <p class="card-text bg-info">{{article.post|truncatewords:10}}</p>
+      <a href="{url 'article'/{{article.id}}}" class="btn btn-success bg-success">{{article.tags}}</a>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+{%else%}
+<p>No Results Found. {{message}}</p>
+{%endif%}
+{%endblock%}

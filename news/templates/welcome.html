@@ -1,0 +1,21 @@
+{%extends 'all_news/base.html'%}
+{%block content%}
+  <h1>Welcome To My first Django App</h1>
+
+
+{%if results%}
+{%for result in results%}
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top img-responsive" src="{{result.article_image.url}}" alt="Card image cap" height="300px">
+  <div class="card-body">
+    <h5 class="card-title">{{result.title}}</h5>
+    <p class="card-text">{{result.post|truncatewords:30}}</p>
+    <a href="#" class="bg-light">{{result.tags}}</a>
+    <a href="{% url 'articles_ind' result.id %}"><button class="btn btn-default">Read More</button></a>
+  </div>
+</div>
+{%endfor%}
+{%else%}
+<p>No items found</p>
+{%endif%}
+{%endblock%}

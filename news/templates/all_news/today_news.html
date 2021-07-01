@@ -1,0 +1,27 @@
+{%extends 'all_news/base.html'%}
+
+{%block content%}
+
+{{title}}
+<h4 class="bg-warning text-center">{{today|date:'l d-F Y'}}</h4>
+<div class="container">
+  <div class="card__container">
+    {%for item in news%}
+    <!--Card start-->
+    <div class="card">
+      <div class="card__content">
+        <h3 class="card__header">{{item.title}}</h3>
+        <img class="card-image img-responsive" src="{{item.article_image.url}}" alt="Article Image">
+        <p class="card__info">{{item.post|truncatewords:10}}</p>
+        <small class="card-footer text-left">Author {{item.editor}}</small>
+        <small class="card-footer text-right">Tag: {{item.tags}}</small>
+        <a href="{%url 'articles_ind' item.id%}"><button class="card__button">Read now</button></a>
+      </div>
+    </div>
+    {%empty%}
+    <h3>No stories here today</h3>
+    <!--Card End-->
+    {%endfor%}
+    {%endblock%}
+  </div>
+</div>

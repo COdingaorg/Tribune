@@ -1,0 +1,17 @@
+{%extends 'all_news/base.html'%}
+{%block content%}
+<h3>{{date|date:'l d-F Y'}}</h3>
+{%for item in news%}
+<!--Card start-->
+<div class="card">
+  <div class="card__content">
+    <h3 class="card__header">{{item.title}}</h3>
+    <p class="card__info">{{item.content}}</p>
+    <button class="card__button">Read now</button>
+  </div>
+</div>
+{%empty%}
+<h3>No stories here today</h3>
+<!--Card End-->
+{%endfor%}
+{%endblock%}
