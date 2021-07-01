@@ -14,8 +14,18 @@ import os
 import dj_database_url
 
 prod_db = dj_database_url.config(conn_max_age=500)
-DATABASES = {'default':dj_database_url.config()}
-DATABASES['default'].update(prod_db)
+
+POSTGRES_URL = "HEROKU_POSTGRESQL_DBNAME_URL"
+
+import dj_database_url
+
+if 'DATABASES' not in locals():
+    DATABASES = {'default':dj_database_url.config()}
+    DATABASES['default'] = dj_database_url.config(default='postgres://(username):(password)@localhost:5432/db_name')
+
+if POSTGRES_URL in os.environ:
+    DATABASES = {}
+    DATABASES['default'] = dj_database_url.config(default=os.environ[POSTGRES_URL])
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
